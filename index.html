@@ -36,28 +36,16 @@ h1{font:400 clamp(34px,10vw,42px)/1.05 var(--display);letter-spacing:.01em}
 .wins b{font-size:inherit;color:var(--taxi)}
 .event{display:inline-block;margin-top:20px;padding:7px 14px;border:1.5px solid var(--taxi);border-radius:99px;color:var(--taxi);font-size:14px;font-weight:500}
 .links{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
-.links a,.qr-btn{display:flex;align-items:center;gap:14px;padding:12px 14px;text-decoration:none;color:var(--ink);
+.links a{display:flex;align-items:center;gap:14px;padding:12px 14px;text-decoration:none;color:var(--ink);
 background:var(--cream);border:2.5px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);
 transition:transform .12s,box-shadow .12s}
-.links a:hover,.qr-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
-.links a:active,.qr-btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.links a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.links a:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
 .ico{width:40px;height:40px;border-radius:11px;background:var(--ink);color:var(--taxi);display:grid;place-items:center;flex:none}
 .ico svg{width:20px;height:20px;fill:currentColor}
 .name{font-weight:600;font-size:17px}
 .handle{margin-left:auto;color:var(--muted);font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.qr-btn{width:100%;justify-content:center;background:var(--red);color:var(--cream);font:600 17px var(--body);cursor:pointer;padding:15px}
-.qr-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
 a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-dialog{border:3px solid var(--ink);border-radius:26px;padding:26px;background:var(--taxi);color:var(--ink);
-width:min(340px,calc(100vw - 36px));text-align:center;margin:auto;box-shadow:7px 7px 0 var(--ink)}
-dialog::backdrop{background:rgba(17,17,17,.78)}
-dialog[open]{animation:pop .22s ease-out}
-@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
-.qr-wrap{background:#fff;padding:14px;border:3px solid var(--ink);border-radius:16px;display:inline-block;line-height:0}
-#qr canvas,#qr img{width:210px!important;height:210px!important}
-dialog p{margin-top:16px;font-size:15px}
-dialog strong{display:block;font:400 21px var(--display);margin-bottom:3px}
-.close{margin-top:16px;background:var(--ink);color:var(--taxi);border:0;font:600 15px var(--body);padding:11px 26px;border-radius:12px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -95,33 +83,6 @@ dialog strong{display:block;font:400 21px var(--display);margin-bottom:3px}
       <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.4 7H4v.9l8 5.5 8-5.5V7h-.4L12 12.2z"/></svg></span>
       <span class="name">Email</span><span class="handle">gaiktanmay05@gmail.com</span></a></li>
   </ul>
-
-  <button class="qr-btn" id="open" type="button">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></svg>
-    Show my QR
-  </button>
 </main>
-
-<dialog id="dlg" aria-label="QR code for this page">
-  <div class="qr-wrap"><div id="qr"></div></div>
-  <p><strong>Tanmay Gaikwad</strong>Scan to open this page</p>
-  <button class="close" id="close" type="button">Close</button>
-</dialog>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-(function(){
-  var dlg=document.getElementById('dlg'),made=false;
-  function make(){
-    if(made||typeof QRCode==='undefined')return;
-    var url=location.href.split('#')[0];
-    new QRCode(document.getElementById('qr'),{text:url,width:440,height:440,colorDark:'#111111',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
-    made=true;
-  }
-  document.getElementById('open').addEventListener('click',function(){make();dlg.showModal();});
-  document.getElementById('close').addEventListener('click',function(){dlg.close();});
-  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
-})();
-</script>
 </body>
 </html>
